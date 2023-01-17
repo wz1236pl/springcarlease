@@ -1,0 +1,60 @@
+2023-01-17 17:13:24 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Błąd składniowy w wyrażeniu SQL "create table [*]user (id bigint not null, dokument varchar(255), email varchar(255), imie varchar(255), nazwisko varchar(255), password varchar(255), role varchar(255), telefon varchar(255), primary key (id))"; oczekiwano "identifier"
+Syntax error in SQL statement "create table [*]user (id bigint not null, dokument varchar(255), email varchar(255), imie varchar(255), nazwisko varchar(255), password varchar(255), role varchar(255), telefon varchar(255), primary key (id))"; expected "identifier"; SQL statement:
+create table user (id bigint not null, dokument varchar(255), email varchar(255), imie varchar(255), nazwisko varchar(255), password varchar(255), role varchar(255), telefon varchar(255), primary key (id)) [42001-214]
+2023-01-17 17:13:24 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Błąd składniowy w wyrażeniu SQL "alter table [*]user drop constraint if exists UK_ob8kqyqqgmefl0aco34akdtpe"; oczekiwano "identifier"
+Syntax error in SQL statement "alter table [*]user drop constraint if exists UK_ob8kqyqqgmefl0aco34akdtpe"; expected "identifier"; SQL statement:
+alter table user drop constraint if exists UK_ob8kqyqqgmefl0aco34akdtpe [42001-214]
+2023-01-17 17:13:24 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Błąd składniowy w wyrażeniu SQL "alter table [*]user add constraint UK_ob8kqyqqgmefl0aco34akdtpe unique (email)"; oczekiwano "identifier"
+Syntax error in SQL statement "alter table [*]user add constraint UK_ob8kqyqqgmefl0aco34akdtpe unique (email)"; expected "identifier"; SQL statement:
+alter table user add constraint UK_ob8kqyqqgmefl0aco34akdtpe unique (email) [42001-214]
+2023-01-17 17:13:47 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Błąd składniowy w wyrażeniu SQL "create table [*]user (id bigint not null, dokument varchar(255), email varchar(255), imie varchar(255), nazwisko varchar(255), password varchar(255), role varchar(255), telefon varchar(255), primary key (id))"; oczekiwano "identifier"
+Syntax error in SQL statement "create table [*]user (id bigint not null, dokument varchar(255), email varchar(255), imie varchar(255), nazwisko varchar(255), password varchar(255), role varchar(255), telefon varchar(255), primary key (id))"; expected "identifier"; SQL statement:
+create table user (id bigint not null, dokument varchar(255), email varchar(255), imie varchar(255), nazwisko varchar(255), password varchar(255), role varchar(255), telefon varchar(255), primary key (id)) [42001-214]
+2023-01-17 17:13:47 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Błąd składniowy w wyrażeniu SQL "alter table [*]user drop constraint if exists UK_ob8kqyqqgmefl0aco34akdtpe"; oczekiwano "identifier"
+Syntax error in SQL statement "alter table [*]user drop constraint if exists UK_ob8kqyqqgmefl0aco34akdtpe"; expected "identifier"; SQL statement:
+alter table user drop constraint if exists UK_ob8kqyqqgmefl0aco34akdtpe [42001-214]
+2023-01-17 17:13:47 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Błąd składniowy w wyrażeniu SQL "alter table [*]user add constraint UK_ob8kqyqqgmefl0aco34akdtpe unique (email)"; oczekiwano "identifier"
+Syntax error in SQL statement "alter table [*]user add constraint UK_ob8kqyqqgmefl0aco34akdtpe unique (email)"; expected "identifier"; SQL statement:
+alter table user add constraint UK_ob8kqyqqgmefl0aco34akdtpe unique (email) [42001-214]
+2023-01-17 17:17:01 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Błąd składniowy w wyrażeniu SQL "create table [*]user (id bigint not null, dokument varchar(255), email varchar(255), imie varchar(255), nazwisko varchar(255), password varchar(255), role varchar(255), telefon varchar(255), primary key (id))"; oczekiwano "identifier"
+Syntax error in SQL statement "create table [*]user (id bigint not null, dokument varchar(255), email varchar(255), imie varchar(255), nazwisko varchar(255), password varchar(255), role varchar(255), telefon varchar(255), primary key (id))"; expected "identifier"; SQL statement:
+create table user (id bigint not null, dokument varchar(255), email varchar(255), imie varchar(255), nazwisko varchar(255), password varchar(255), role varchar(255), telefon varchar(255), primary key (id)) [42001-214]
+2023-01-17 17:17:01 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Błąd składniowy w wyrażeniu SQL "alter table [*]user drop constraint if exists UK_ob8kqyqqgmefl0aco34akdtpe"; oczekiwano "identifier"
+Syntax error in SQL statement "alter table [*]user drop constraint if exists UK_ob8kqyqqgmefl0aco34akdtpe"; expected "identifier"; SQL statement:
+alter table user drop constraint if exists UK_ob8kqyqqgmefl0aco34akdtpe [42001-214]
+2023-01-17 17:17:01 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Błąd składniowy w wyrażeniu SQL "alter table [*]user add constraint UK_ob8kqyqqgmefl0aco34akdtpe unique (email)"; oczekiwano "identifier"
+Syntax error in SQL statement "alter table [*]user add constraint UK_ob8kqyqqgmefl0aco34akdtpe unique (email)"; expected "identifier"; SQL statement:
+alter table user add constraint UK_ob8kqyqqgmefl0aco34akdtpe unique (email) [42001-214]
+2023-01-17 17:18:03 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Błąd składniowy w wyrażeniu SQL "create table [*]user (id bigint not null, dokument varchar(255), email varchar(255), imie varchar(255), nazwisko varchar(255), password varchar(255), role varchar(255), telefon varchar(255), primary key (id))"; oczekiwano "identifier"
+Syntax error in SQL statement "create table [*]user (id bigint not null, dokument varchar(255), email varchar(255), imie varchar(255), nazwisko varchar(255), password varchar(255), role varchar(255), telefon varchar(255), primary key (id))"; expected "identifier"; SQL statement:
+create table user (id bigint not null, dokument varchar(255), email varchar(255), imie varchar(255), nazwisko varchar(255), password varchar(255), role varchar(255), telefon varchar(255), primary key (id)) [42001-214]
+2023-01-17 17:18:03 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Błąd składniowy w wyrażeniu SQL "alter table [*]user drop constraint if exists UK_ob8kqyqqgmefl0aco34akdtpe"; oczekiwano "identifier"
+Syntax error in SQL statement "alter table [*]user drop constraint if exists UK_ob8kqyqqgmefl0aco34akdtpe"; expected "identifier"; SQL statement:
+alter table user drop constraint if exists UK_ob8kqyqqgmefl0aco34akdtpe [42001-214]
+2023-01-17 17:18:03 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Błąd składniowy w wyrażeniu SQL "alter table [*]user add constraint UK_ob8kqyqqgmefl0aco34akdtpe unique (email)"; oczekiwano "identifier"
+Syntax error in SQL statement "alter table [*]user add constraint UK_ob8kqyqqgmefl0aco34akdtpe unique (email)"; expected "identifier"; SQL statement:
+alter table user add constraint UK_ob8kqyqqgmefl0aco34akdtpe unique (email) [42001-214]
+2023-01-17 17:19:22 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Błąd składniowy w wyrażeniu SQL "create table [*]user (id bigint not null, dokument varchar(255), email varchar(255), imie varchar(255), nazwisko varchar(255), password varchar(255), role varchar(255), telefon varchar(255), primary key (id))"; oczekiwano "identifier"
+Syntax error in SQL statement "create table [*]user (id bigint not null, dokument varchar(255), email varchar(255), imie varchar(255), nazwisko varchar(255), password varchar(255), role varchar(255), telefon varchar(255), primary key (id))"; expected "identifier"; SQL statement:
+create table user (id bigint not null, dokument varchar(255), email varchar(255), imie varchar(255), nazwisko varchar(255), password varchar(255), role varchar(255), telefon varchar(255), primary key (id)) [42001-214]
+2023-01-17 17:19:22 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Błąd składniowy w wyrażeniu SQL "alter table [*]user drop constraint if exists UK_ob8kqyqqgmefl0aco34akdtpe"; oczekiwano "identifier"
+Syntax error in SQL statement "alter table [*]user drop constraint if exists UK_ob8kqyqqgmefl0aco34akdtpe"; expected "identifier"; SQL statement:
+alter table user drop constraint if exists UK_ob8kqyqqgmefl0aco34akdtpe [42001-214]
+2023-01-17 17:19:22 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Błąd składniowy w wyrażeniu SQL "alter table [*]user add constraint UK_ob8kqyqqgmefl0aco34akdtpe unique (email)"; oczekiwano "identifier"
+Syntax error in SQL statement "alter table [*]user add constraint UK_ob8kqyqqgmefl0aco34akdtpe unique (email)"; expected "identifier"; SQL statement:
+alter table user add constraint UK_ob8kqyqqgmefl0aco34akdtpe unique (email) [42001-214]
