@@ -24,9 +24,8 @@ public class User {
     private String imie;
     private String nazwisko;
     private String telefon;
-    private String dokument;
-    // @OneToMany(mappedBy = "gosc")  
-    // private List<Rezerwacja> rezerwacja  = new ArrayList()<Rezerwacja>(); 
+    @OneToMany(mappedBy = "user")  
+    private List<Wypozyczenie> wypo  = new ArrayList<Wypozyczenie>(); 
     
     public User() {
     }
@@ -73,11 +72,18 @@ public class User {
     public void setTelefon(String telefon) {
         this.telefon = telefon;
     }
-    public String getDokument() {
-        return dokument;
+    public List<Wypozyczenie> getWypo() {
+        return wypo;
     }
-    public void setDokument(String dokument) {
-        this.dokument = dokument;
+
+    public void setWypo(List<Wypozyczenie> wypo) {
+        this.wypo = wypo;
     }
-    
+
+    @Override
+    public String toString() {
+        return "User [id=" + id + ", email=" + email + ", password=" + password + ", role=" + role + ", imie=" + imie
+                + ", nazwisko=" + nazwisko + ", telefon=" + telefon + ", wypoList=" + wypo + "]";
+    }
+
 }

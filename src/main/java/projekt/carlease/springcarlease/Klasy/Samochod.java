@@ -24,8 +24,11 @@ public class Samochod {
     private int rok;
     private int moc;
     private int cena;
+    private String miasto;
     @OneToMany(mappedBy = "samochod")
     private List<CarImg> zdj = new ArrayList<CarImg>();
+    @OneToMany(mappedBy = "samochod")
+    private List<Wypozyczenie> wypo = new ArrayList<Wypozyczenie>();
     
     public Samochod() {
     }
@@ -85,5 +88,35 @@ public class Samochod {
         this.cena = cena;
     }
 
+    public String getMiasto() {
+        return miasto;
+    }
+
+    public void setMiasto(String miasto) {
+        this.miasto = miasto;
+    }
+
+    public List<CarImg> getZdj() {
+        return zdj;
+    }
+
+    public void setZdj(List<CarImg> zdj) {
+        this.zdj = zdj;
+    }
+
+    public List<Wypozyczenie> getWypo() {
+        return wypo;
+    }
+
+    public void setWypo(List<Wypozyczenie> wypo) {
+        this.wypo = wypo;
+    }
+
+    @Override
+    public String toString() {
+        return "Samochod [id=" + id + ", nrRej=" + nrRej + ", marka=" + marka + ", model=" + model + ", typ=" + typ
+                + ", kolor=" + kolor + ", rok=" + rok + ", moc=" + moc + ", cena=" + cena + ", miasto=" + miasto
+                + ", zdj=" + zdj + ", wypo=" + wypo + "]";
+    }
     
 }
