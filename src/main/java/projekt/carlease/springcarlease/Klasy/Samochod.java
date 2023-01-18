@@ -25,6 +25,7 @@ public class Samochod {
     private int moc;
     private int cena;
     private String miasto;
+    private int zarezerwowany;
     @OneToMany(mappedBy = "samochod")
     private List<CarImg> zdj = new ArrayList<CarImg>();
     @OneToMany(mappedBy = "samochod")
@@ -112,11 +113,19 @@ public class Samochod {
         this.wypo = wypo;
     }
 
+    public int getZarezerwowany() {
+        return zarezerwowany;
+    }
+
+    public void setZarezerwowany(int zarezerwowany) {
+        this.zarezerwowany = zarezerwowany;
+    }
+
     @Override
     public String toString() {
         return "Samochod [id=" + id + ", nrRej=" + nrRej + ", marka=" + marka + ", model=" + model + ", typ=" + typ
                 + ", kolor=" + kolor + ", rok=" + rok + ", moc=" + moc + ", cena=" + cena + ", miasto=" + miasto
                 + ", zdj=" + zdj + ", wypo=" + wypo + "]";
     }
-    
+
 }

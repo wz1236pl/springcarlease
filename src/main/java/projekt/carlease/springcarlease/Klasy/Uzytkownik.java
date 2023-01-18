@@ -3,7 +3,6 @@ package projekt.carlease.springcarlease.Klasy;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,22 +11,21 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="user") 
-public class User {
+@Table(name="uzytkownik") 
+public class Uzytkownik {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
-    @Column(unique = true)
     private String email;
     private String password;
     private String role;
     private String imie;
     private String nazwisko;
     private String telefon;
-    @OneToMany(mappedBy = "user")  
-    private List<Wypozyczenie> wypo  = new ArrayList<Wypozyczenie>(); 
+    @OneToMany(mappedBy = "uzytkownik")  
+    private List<Wypozyczenie> wypo = new ArrayList<Wypozyczenie>();
     
-    public User() {
+    public Uzytkownik() {
     }
 
     public Long getId() {

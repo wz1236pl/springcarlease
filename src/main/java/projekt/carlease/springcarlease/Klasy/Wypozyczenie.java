@@ -20,7 +20,7 @@ public class Wypozyczenie {
     @ManyToOne
     private Samochod samochod;
     @ManyToOne
-    private User user;
+    private Uzytkownik uzytkownik;
 
     public Wypozyczenie() {
     }
@@ -57,18 +57,18 @@ public class Wypozyczenie {
         this.samochod = samochod;
     }
 
-    public User getUser() {
-        return user;
+    public Uzytkownik getUzytkownik() {
+        return uzytkownik;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUzytkownik(Uzytkownik uzytkownik) {
+        this.uzytkownik = uzytkownik;
     }
 
     @Override
     public String toString() {
         return "Wypozyczenie [id=" + id + ", dataStart=" + dataStart + ", dataKoniec=" + dataKoniec + ", samochod="
-                + samochod.getId() + ", user=" + user.getEmail() + "]";
+                + samochod.getId() + ", user=" + uzytkownik.getEmail() + "]";
     }
     
     

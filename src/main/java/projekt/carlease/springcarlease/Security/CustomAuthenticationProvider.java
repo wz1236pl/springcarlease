@@ -15,14 +15,14 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
-import projekt.carlease.springcarlease.Klasy.User;
-import projekt.carlease.springcarlease.Repozytoria.UserRepo;
+import projekt.carlease.springcarlease.Klasy.Uzytkownik;
+import projekt.carlease.springcarlease.Repozytoria.UzytkownikRepo;
 
 @Component
 public class CustomAuthenticationProvider implements AuthenticationProvider{
 
     @Autowired
-    private UserRepo userRepo;
+    private UzytkownikRepo uzytRepo;
     @Autowired
     private PasswordEncoder passwordEncoder;
     
@@ -31,7 +31,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider{
         final String email = authentication.getName();                                                  // z form logowania pobiera login
         final String password = authentication.getCredentials().toString();                             // z form logowania pobiera hasło
         
-        User user = userRepo.findByEmail(email);                                                        // szuka użytkownika z podanym w logowaniu emailem
+        Uzytkownik user = uzytRepo.findByEmail(email);                                                        // szuka użytkownika z podanym w logowaniu emailem
         if(user == null){throw new UsernameNotFoundException("User not found");}                   // jeśli nie ma takiego w bazie wywala wyjątek
         if(passwordEncoder.matches(password, user.getPassword())){                                      // jak jest to sprawdza czy hasła się zgadzają 
             List<GrantedAuthority> authorities = new ArrayList<>();                                     // tworzy liste typu GrantedAuthority
