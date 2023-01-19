@@ -19,10 +19,10 @@
       <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
         <ul class="navbar-nav ">
           <li class="nav-item active mx-2">
-            <a class="nav-link" href="/"><i class="bi bi-house-door-fill"></i> Strona główna </a>
+            <a class="nav-link" href="/user/edytujDane">Witaj <strong><span sec:authentication="name"></span>!</strong></a>
           </li>
           <li class="nav-item active mx-2">
-            <a class="nav-link" href="/register"><i class="bi bi-person-fill-add"></i> Zarejestruj </a>
+            <a class="nav-link" href="/"><i class="bi bi-house-door-fill"></i> Strona główna </a>
           </li>
           <li class="nav-item active mx-2">
             <a class="nav-link" href="/login"><i class="bi bi-box-arrow-in-right"></i> Zaloguj </a>
@@ -37,14 +37,14 @@
               <div class="col-12 col-md-9 col-lg-7 col-xl-6">
                 <div class="card" style="border-radius: 15px;">
                   <div class="card-body p-5">
-                    <h2 class="text-uppercase text-center mb-5">Zarejestruj się!</h2>
-                    <form th:action="@{/register}" th:object="${UserIn}" method="post">
+                    <h2 class="text-uppercase text-center mb-5"> Edytuj dane</h2>
+                    <form th:action="@{/user/edytujDane}" th:object="${UserIn}" method="post">
                       <div class="form-outline mb-4">
-                        <input th:field="*{email}" type="text" id="form3Example1cg" class="form-control form-control-lg" required read only/>
+                        <input th:field="*{email}" type="text" id="form3Example1cg" class="form-control form-control-lg" required readonly/>
                         <label class="form-label" for="form3Example1cg">Email</label>
                       </div>
                       <div class="form-outline mb-4">
-                        <input th:field="*{password}" type="password" id="form3Example2cg" class="form-control form-control-lg" required/>
+                        <input th:field="*{password}" type="password" id="form3Example2cg" class="form-control form-control-lg" />
                         <label class="form-label" for="form3Example2cg">Hasło</label>
                       </div>
                       <div class="form-outline mb-4">
@@ -60,10 +60,11 @@
                         <label class="form-label" for="form3Example5cg">Telefon</label>
                       </div>
                       <div class="d-flex justify-content-center my-2">
-                          <label th:if="${errorEdit}" class="text-danger fw-bold h5">Wystąpił błąd podczas edycji!</label>
+                        <label th:if="${param.success}" class="text-success fw-bold h5">Pomyślnie edytowano dane!</label>
+                        <label th:if="${param.error}" class="text-danger fw-bold h5">Wystąpił błąd podczas edycji!</label>
                       </div>
                       <div class="d-flex justify-content-center">
-                        <input type="submit" value="Zarejestruj" class="btn btn-success btn-block btn-lg text-light">
+                        <input type="submit" value="Potwierdź" class="btn btn-success btn-block btn-lg text-light">
                       </div>
                     </form>
                   </div>

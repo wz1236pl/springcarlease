@@ -57,6 +57,8 @@ public class Controllers  {                                 //tu będziesz miał
     
     @GetMapping(value = "/AdminPage")
     public String adminHomePage(Model model){
+        model.addAttribute("listaWypoAkt", wypRepo.findAllByDataKoniecIsNull());
+        model.addAttribute("listaWypoHis", wypRepo.findAllByDataKoniecIsNotNull());
         return "adminHomePage";
     }
 
@@ -141,8 +143,6 @@ public class Controllers  {                                 //tu będziesz miał
     public String rezerwuj(Model model, Authentication auth, @PathVariable("id") Long id){
         Samochod car = samRepo.findByIdIs(id);
         Uzytkownik user = uzytRepo.findByEmail(auth.getName());
-        car.setZarezerwowany(1);
-        samRepo.save(car);
         Wypozyczenie wypo = new Wypozyczenie(new Date(System.currentTimeMillis()),car,user);
         model.addAttribute("rezerwacjaIn", wypo);
         return "rezerwuj";
@@ -151,6 +151,9 @@ public class Controllers  {                                 //tu będziesz miał
     @PostMapping(value = "/user/rezerwuj")
     public String rezerwuj(Model model,Wypozyczenie wypo){
         wypRepo.save(wypo);
+        Samochod car = wypo.getSamochod();
+        car.setZarezerwowany(1);
+        samRepo.save(car);
         model.addAttribute("autaOut", samRepo.findAllByZarezerwowanyIs(0));
         model.addAttribute("success", true);
         return "loggedHomePage";
@@ -182,17 +185,20 @@ public class Controllers  {                                 //tu będziesz miał
     @GetMapping(value="/user/edytujDane")
     public String edytujDane(Model model, Authentication auth){
         model.addAttribute("UserIn", uzytRepo.findByEmail(auth.getName()));
-        return "edytujDaneGosc";
+        return "edytujUser";
     }
     @PostMapping(value="/user/edytujDane")
     public String edytujDane(Model model, Authentication auth, Uzytkownik edytowany){
         try {
             Uzytkownik stary = uzytRepo.findByEmail(auth.getName());
+            if(edytowany.getPassword()==null){
+                edytowany.setPassword(stary.getPassword());
+            }else{
+                edytowany.setPassword(passwordEncoder.encode(edytowany.getPassword()));
+            }
             edytowany.setId(stary.getId());
             edytowany.setRole(stary.getRole());
-            edytowany.setPassword(stary.getPassword());
-            // uzytRepo.save(edytowany);
-            System.out.println(edytowany);
+            uzytRepo.save(edytowany);
             return "redirect:/user/edytujDane?success";   
         } catch (Exception e) {
             return "redirect:/user/edytujDane?error";

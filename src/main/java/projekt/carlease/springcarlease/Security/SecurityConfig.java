@@ -28,6 +28,8 @@ public class SecurityConfig {
             .antMatchers("/register").permitAll()                                               //do logowania i rejestracji dajemy dostęp wszystkim
             .antMatchers("/login").permitAll()
             .antMatchers("/").permitAll()                                                       //na pusty endpoint też
+            .antMatchers("/LoggedPage").hasAnyAuthority("USER")
+            .antMatchers("/AdminPage").hasAnyAuthority("ADMIN")  
             .antMatchers("/user/edytujDane").hasAnyAuthority("USER","ADMIN")    //do edycji własnego profilu dajemy dostęp adminowi i userowi
             .antMatchers("/user/**").hasAnyAuthority("USER")                    //ograniczamy dostęp tylko dla zalogowanego gościa (admin nie może rezerwować)
             .antMatchers("/admin/**").hasAnyAuthority("ADMIN")                  //to samo dla admina
