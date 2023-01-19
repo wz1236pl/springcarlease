@@ -46,6 +46,7 @@
                                 <th scope="col">#</th>
                                 <th scope="col">Data rozpoczęcia</th>
                                 <th scope="col">Samochód</th>
+                                <th scope="col">Email</th>
                                 <th scope="col">Koszt</th>
                                 <th scope="col">Zwróć</th>
                               </tr>
@@ -55,6 +56,7 @@
                                 <th scope="row" th:text="${w.count}"></th>
                                 <td th:text="${wypoAkt.dataStart}"></td>
                                 <td th:text="${wypoAkt.samochod.marka}+' '+${wypoAkt.samochod.model}"></td>
+                                <td th:text="${wypoAkt.uzytkownik.email}"></td>
                                 <td th:text="${wypoAkt.samochod.cena} * ${wypoAkt.getDni()}+'zł'"></td>
                                 <td>
                                   <a th:href="'/user/oddaj/'+${wypoAkt.id}" >
@@ -80,6 +82,7 @@
                                 <th scope="col">Data rozpoczęcia</th>
                                 <th scope="col">Data zakończenia</th>
                                 <th scope="col">Samochód</th>
+                                <th scope="col">Email</th>
                                 <th scope="col">Zapłacono</th>
                               </tr>
                             </thead>
@@ -89,6 +92,7 @@
                                 <td th:text="${wypoHis.dataStart}"></td>
                                 <td th:text="${wypoHis.dataKoniec}"></td>
                                 <td th:text="${wypoHis.samochod.marka}+' '+${wypoHis.samochod.model}"></td>
+                                <td th:text="${wypoHis.uzytkownik.email}"></td>
                                 <td th:text="${wypoHis.samochod.cena} * ${wypoHis.getDniWszystkie()}+'zł'"></td>
                               </tr>
                             </tbody>

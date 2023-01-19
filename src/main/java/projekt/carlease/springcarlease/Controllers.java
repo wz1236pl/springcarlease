@@ -3,7 +3,6 @@ package projekt.carlease.springcarlease;
 import java.io.File;
 import java.sql.Date;
 
-import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -67,12 +66,6 @@ public class Controllers  {                                 //tu będziesz miał
         return "loggedHomePage";
     }
 
-    @GetMapping(value = "/register")
-    public String register(Model model){
-        model.addAttribute("UserIn", new Uzytkownik());             
-        return "register";
-    }
-
     @GetMapping(value = "/szukaj")
     public String szukaj(Model model, Authentication auth, String szukajMiasto){
         if(szukajMiasto!=""){
@@ -85,6 +78,12 @@ public class Controllers  {                                 //tu będziesz miał
         }else{
             return "defaultHomePage";
         }
+    } 
+    
+    @GetMapping(value = "/register")
+    public String register(Model model){
+        model.addAttribute("UserIn", new Uzytkownik());             
+        return "register";
     }
 
     @PostMapping(value = "/register")
@@ -139,16 +138,18 @@ public class Controllers  {                                 //tu będziesz miał
     }
 
     @GetMapping(value = "/user/rezerwuj/{id}")
-    public String addNewCar(Model model, Authentication auth, @PathVariable("id") Long id){
+    public String rezerwuj(Model model, Authentication auth, @PathVariable("id") Long id){
         Samochod car = samRepo.findByIdIs(id);
         Uzytkownik user = uzytRepo.findByEmail(auth.getName());
+        car.setZarezerwowany(1);
+        samRepo.save(car);
         Wypozyczenie wypo = new Wypozyczenie(new Date(System.currentTimeMillis()),car,user);
         model.addAttribute("rezerwacjaIn", wypo);
         return "rezerwuj";
     }
 
     @PostMapping(value = "/user/rezerwuj")
-    public String addNewCar(Model model,Wypozyczenie wypo){
+    public String rezerwuj(Model model,Wypozyczenie wypo){
         wypRepo.save(wypo);
         model.addAttribute("autaOut", samRepo.findAllByZarezerwowanyIs(0));
         model.addAttribute("success", true);
@@ -156,10 +157,47 @@ public class Controllers  {                                 //tu będziesz miał
     }
 
     @GetMapping(value = "/user/mojeRezerwacje")
-    public String addNewCar(Model model, Authentication auth){
+    public String mojeRezerwacje(Model model, Authentication auth){
         model.addAttribute("listaWypoAkt", wypRepo.findAllByUzytkownikEmailIsAndDataKoniecIsNull(auth.getName()));
         model.addAttribute("listaWypoHis", wypRepo.findAllByUzytkownikEmailIsAndDataKoniecIsNotNull(auth.getName()));
         return "mojeWypozyczenia";
+    }
+
+    @GetMapping(value = "/user/oddaj/{id}")
+    public String oddaj(Model model,@PathVariable("id") Long id){
+        Wypozyczenie wypo = wypRepo.findByIdIs(id);
+        wypo.setDataKoniec(new Date(System.currentTimeMillis()));
+        model.addAttribute("rezerwacjaIn",wypo);
+        return "oddaj";
+    }
+
+    @PostMapping(value = "/user/oddaj")
+    public String oddaj(Model model,Wypozyczenie wypo, Authentication auth){
+        wypRepo.save(wypo);
+        Samochod car = wypo.getSamochod();
+        samRepo.save(car);
+        return "redirect:/user/mojeRezerwacje";
+    }
+
+    @GetMapping(value="/user/edytujDane")
+    public String edytujDane(Model model, Authentication auth){
+        model.addAttribute("UserIn", uzytRepo.findByEmail(auth.getName()));
+        return "edytujDaneGosc";
+    }
+    @PostMapping(value="/user/edytujDane")
+    public String edytujDane(Model model, Authentication auth, Uzytkownik edytowany){
+        try {
+            Uzytkownik stary = uzytRepo.findByEmail(auth.getName());
+            edytowany.setId(stary.getId());
+            edytowany.setRole(stary.getRole());
+            edytowany.setPassword(stary.getPassword());
+            // uzytRepo.save(edytowany);
+            System.out.println(edytowany);
+            return "redirect:/user/edytujDane?success";   
+        } catch (Exception e) {
+            return "redirect:/user/edytujDane?error";
+        }
+        
     }
 
 }
