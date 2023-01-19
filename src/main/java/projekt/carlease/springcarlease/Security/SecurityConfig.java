@@ -33,7 +33,10 @@ public class SecurityConfig {
             .antMatchers("/admin/**").hasAnyAuthority("ADMIN")                  //to samo dla admina
             .and()                                                                                             //jak coś to "/**" to że po / wszystkie inne linki 
             .formLogin()
-            .loginPage("/login");                                                                   //wywołuje ten endpoint jako podstawowy logowania
+            .loginPage("/login")                                                                    //wywołuje ten endpoint jako podstawowy logowania
+            .and()
+            .logout()
+            .logoutSuccessUrl("/");                                                          //przenosi na to url po wylogowaniu
         
         return http.build();
     }

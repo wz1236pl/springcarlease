@@ -40,7 +40,7 @@
                       <h4 class="card-title mb-3" ><label>Wybierz miasto, w którym chcesz wypożyczyć samochód!</label></h4>
                       <div class="col">
                         <div class="input-group mb-3">
-                          <form class="gap-2">
+                          <form action="/szukaj" mathod="post">
                           <span  class="input-group-text rounded-start">Miasto</span>
                           <select name="szukajMiasto" class="form-select rounded-end" aria-label="Miasto: ">
                             <option value="">Dowolne</option>
@@ -60,13 +60,13 @@
                     <div class="card-body">
                         <div class="row flex-sm-nowrap ">
                             <div class="col-sm  d-flex justify-content-sm-start">
-                                <h4 class="card-title" ><label th:text="${a.marka}+' '+${a.model}"></label> <label style="color:#5e008c" th:text="${a.cena}+'zł'"></label></h4>
+                                <h4 class="card-title" ><label th:text="${a.marka}+' '+${a.model}"></label> <label style="color:#5e008c" th:text="${a.cena}+'zł/24h'"></label></h4>
                             </div>
                         </div>
                       
                         <div th:id="'carouselExampleControls'+${a.id}" class="carousel slide" data-ride="carousel" style="height: 350px;">
                             <div class="carousel-inner">
-                              <div th:each="img, i: ${a.images}" th:class="${i.first} ? 'carousel-item active' : 'carousel-item'">
+                              <div th:each="img, i: ${a.zdj}" th:class="${i.first} ? 'carousel-item active' : 'carousel-item'">
                                 <img id="ItemPreview" class="d-block h-100 mx-auto" th:src="'data:image/png;base64,'+${img.getImage()}">
                               </div>
                             </div>
@@ -80,28 +80,18 @@
                             </a>
                           </div>
                         </div>
-                      
                         <div class="row fs-5">
-                            <div class="col-md text-left" style="white-space: nowrap;"><Label th:utext="'Przebieg: '+${a.przebieg}"></Label></div>    
                             <div class="col-md text-left" style="white-space: nowrap;"><Label th:utext="'Rok: '+${a.rok}"></Label></div>    
-                            <div class="col-md text-left" style="white-space: nowrap;"><Label th:utext="'Moc: '+${a.moc}"></Label></div>    
+                            <div class="col-md text-left" style="white-space: nowrap;"><Label th:utext="'Moc: '+${a.moc}+' HP'"></Label></div>    
+                            <div class="col-md text-left" style="white-space: nowrap;"><Label th:utext="'Miasto: '+${a.miasto}"></Label></div>    
                         </div>
                         <div class="row fs-5">
-                            <div class="col-md text-left" style="white-space: nowrap;"><Label th:utext="'Pojemność: '+${a.pojemnosc}"></Label></div>    
-                            <div class="col-md text-left" style="white-space: nowrap;"><Label th:utext="'Paliwo: '+${a.paliwo}"></Label></div>    
-                            <div class="col-md text-left" style="white-space: nowrap;"><Label th:utext="'Kolor: '+${a.kolor}"></Label></div>    
-                        </div>
-                        <div class="row fs-5">
-                            <div class="col-md text-left" style="white-space: nowrap;"><Label th:utext="'VIN: '+${a.vin}"></Label></div>    
-                            <div class="col-md text-left" style="white-space: nowrap;"><Label th:utext="'Nr. rejestracyjny: '+${a.nrRej}"></Label></div>    
                             <div class="col-md text-left" style="white-space: nowrap;"><Label th:utext="'Typ: '+${a.typ}"></Label></div>    
-                        </div>
-                        <div class="row fs-5">
-                            <div class="col-md text-left" style="white-space: nowrap;"><Label th:utext="'Ubezpieczenie: '+(${a.dataUbezpieczenia} ?: 'BRAK')"></Label></div>    
-                            <div class="col-md text-left" style="white-space: nowrap;"><Label th:utext="'Przegląd: '+(${a.dataPrzeglad} ?: 'BRAK')"></Label></div>    
-                            <div class="col-md text-left" style="white-space: nowrap;"><Label th:utext="'Dodano: '+(${a.dataDodania} ?: 'BRAK')"></Label></div>    
+                            <div class="col-md text-left" style="white-space: nowrap;"><Label th:utext="'Kolor: '+${a.kolor}"></Label></div>    
+                            <div class="col-md text-left" style="white-space: nowrap;"><Label th:utext="'Numer rejestracyjny: '+${a.nrRej}"></Label></div>    
                         </div>
                     </div>
+                    <a th:href="'/user/rezerwuj/'+*{a.id}" class="btn btn-primary rounded-0 rounded-bottom">Rezerwuje</a>
                 </div>
             </table>
         </div>
@@ -113,7 +103,6 @@
 
 <style>
 body{
-    min-height: 100vh;
     background-color: #303030;
     }
 caption{

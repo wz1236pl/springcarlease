@@ -27,6 +27,11 @@ public class CarImg {
     public CarImg() {
     }
 
+    public CarImg(Samochod samochod, String url) {
+        this.samochod = samochod;
+        this.url = url;
+    }
+
     public Long getId() {
         return id;
     }
@@ -56,14 +61,14 @@ public class CarImg {
         return "CarImg [id=" + id + ", samochod=" + samochod.getId() + ", url=" + url + "]";
     }
 
-    public String getImage() throws IOException {                           //Metoda do przestłu zdjęcia zakodowanego w Base64
+    public String getImage() throws IOException {                                                   //Metoda do przestłu zdjęcia zakodowanego w Base64
         try{
-            BufferedImage bImage = ImageIO.read(new File(url));             //pobieramy plik ze ścieżki przechowywanej w url
-            ByteArrayOutputStream bos = new ByteArrayOutputStream();        //tworzymy nową tablice bajtów
-            ImageIO.write(bImage, "jpg", bos );                             //konwersja z pliku do tablicy
-            byte [] data = bos.toByteArray();                               //nw tak było w necie i kurwa nie mam pojęcia po chuj to(nie testowałem czy bez tego działa)
-            return Base64.getEncoder().encodeToString(data);                //generujemy Stringa o podstawie 64 który opisuje nasz obrazek
-        }catch(Exception e){                                                //jak coś spadnie z rowerka do walimy wyjątek
+            BufferedImage bImage = ImageIO.read(new File(System.getProperty("user.dir")+url));      //pobieramy plik ze ścieżki przechowywanej w url
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();                                //tworzymy nową tablice bajtów
+            ImageIO.write(bImage, "jpg", bos );                                                     //konwersja z pliku do tablicy
+            byte [] data = bos.toByteArray();                                                       //nw tak było w necie i kurwa nie mam pojęcia po chuj to(nie testowałem czy bez tego działa)
+            return Base64.getEncoder().encodeToString(data);                                        //generujemy Stringa o podstawie 64 który opisuje nasz obrazek
+        }catch(Exception e){                                                                        //jak coś spadnie z rowerka do walimy wyjątek
             return null;
         }
     }

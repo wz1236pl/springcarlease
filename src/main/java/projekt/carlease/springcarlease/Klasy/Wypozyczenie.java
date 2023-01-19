@@ -25,6 +25,12 @@ public class Wypozyczenie {
     public Wypozyczenie() {
     }
 
+    public Wypozyczenie(Date dataStart, Samochod samochod, Uzytkownik uzytkownik) {
+        this.dataStart = dataStart;
+        this.samochod = samochod;
+        this.uzytkownik = uzytkownik;
+    }
+
     public Long getId() {
         return id;
     }
@@ -63,6 +69,18 @@ public class Wypozyczenie {
 
     public void setUzytkownik(Uzytkownik uzytkownik) {
         this.uzytkownik = uzytkownik;
+    }
+
+    public double getDni(){
+        double dni = (System.currentTimeMillis()-dataStart.getTime())/86400000;
+        if(dni<1){dni=1;}
+        return dni;
+    }
+
+    public double getDniWszystkie(){
+        double dni = (dataKoniec.getTime()-dataStart.getTime())/86400000;
+        if(dni<1){dni=1;}
+        return dni;
     }
 
     @Override

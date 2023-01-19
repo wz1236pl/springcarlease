@@ -11,6 +11,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
   <body class="d-flex flex-column">
+    <script th:if="${success}">
+      window.onload = (event)=> {
+      let myAlert = document.querySelector('.toast');
+      let bsAlert = new bootstrap.Toast(myAlert);
+      bsAlert.show();
+     }</script>
     <nav class="navbar navbar-expand-lg navbar-light bg-success w-100 justify-content-between">
       <a class="navbar-brand mx-2" href="/"> <i class="bi bi-car-front-fill"></i> Auto-PANS</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -19,7 +25,13 @@
       <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
         <ul class="navbar-nav ">
           <li class="nav-item active mx-2">
+            <a class="nav-link" href="/">Witaj <span sec:authentication="name"></span>!</a>
+          </li>
+          <li class="nav-item active mx-2">
             <a class="nav-link" href="/"><i class="bi bi-house-door-fill"></i> Strona główna </a>
+          </li>
+          <li class="nav-item active mx-2">
+            <a class="nav-link" href="/user/mojeRezerwacje"><i class="bi bi-person-fill-add"></i> Moje rezerwacje</a>
           </li>
           <li class="nav-item active mx-2">
             <a class="nav-link" href="/logout"><i class="bi bi-box-arrow-in-right"></i> Wyloguj </a>
@@ -37,7 +49,7 @@
                       <h4 class="card-title mb-3" ><label>Wybierz miasto, w którym chcesz wypożyczyć samochód!</label></h4>
                       <div class="col">
                         <div class="input-group mb-3">
-                          <form class="gap-2">
+                          <form action="/szukaj" mathod="post">
                           <span  class="input-group-text rounded-start">Miasto</span>
                           <select name="szukajMiasto" class="form-select rounded-end" aria-label="Miasto: ">
                             <option value="">Dowolne</option>
@@ -52,18 +64,17 @@
                     </div>
                 </div>
               </div>
-            
                 <div class="card bg-secondary w-100 mt-2" th:each="a : ${autaOut}">
                     <div class="card-body">
                         <div class="row flex-sm-nowrap ">
                             <div class="col-sm  d-flex justify-content-sm-start">
-                                <h4 class="card-title" ><label th:text="${a.marka}+' '+${a.model}"></label> <label style="color:#5e008c" th:text="${a.cena}+'zł'"></label></h4>
+                                <h4 class="card-title" ><label th:text="${a.marka}+' '+${a.model}"></label> <label style="color:#5e008c" th:text="${a.cena}+'zł/24h'"></label></h4>
                             </div>
                         </div>
                       
                         <div th:id="'carouselExampleControls'+${a.id}" class="carousel slide" data-ride="carousel" style="height: 350px;">
                             <div class="carousel-inner">
-                              <div th:each="img, i: ${a.images}" th:class="${i.first} ? 'carousel-item active' : 'carousel-item'">
+                              <div th:each="img, i: ${a.zdj}" th:class="${i.first} ? 'carousel-item active' : 'carousel-item'">
                                 <img id="ItemPreview" class="d-block h-100 mx-auto" th:src="'data:image/png;base64,'+${img.getImage()}">
                               </div>
                             </div>
@@ -77,40 +88,28 @@
                             </a>
                           </div>
                         </div>
-                      
                         <div class="row fs-5">
-                            <div class="col-md text-left" style="white-space: nowrap;"><Label th:utext="'Przebieg: '+${a.przebieg}"></Label></div>    
                             <div class="col-md text-left" style="white-space: nowrap;"><Label th:utext="'Rok: '+${a.rok}"></Label></div>    
-                            <div class="col-md text-left" style="white-space: nowrap;"><Label th:utext="'Moc: '+${a.moc}"></Label></div>    
+                            <div class="col-md text-left" style="white-space: nowrap;"><Label th:utext="'Moc: '+${a.moc}+' HP'"></Label></div>    
+                            <div class="col-md text-left" style="white-space: nowrap;"><Label th:utext="'Miasto: '+${a.miasto}"></Label></div>    
                         </div>
                         <div class="row fs-5">
-                            <div class="col-md text-left" style="white-space: nowrap;"><Label th:utext="'Pojemność: '+${a.pojemnosc}"></Label></div>    
-                            <div class="col-md text-left" style="white-space: nowrap;"><Label th:utext="'Paliwo: '+${a.paliwo}"></Label></div>    
-                            <div class="col-md text-left" style="white-space: nowrap;"><Label th:utext="'Kolor: '+${a.kolor}"></Label></div>    
-                        </div>
-                        <div class="row fs-5">
-                            <div class="col-md text-left" style="white-space: nowrap;"><Label th:utext="'VIN: '+${a.vin}"></Label></div>    
-                            <div class="col-md text-left" style="white-space: nowrap;"><Label th:utext="'Nr. rejestracyjny: '+${a.nrRej}"></Label></div>    
                             <div class="col-md text-left" style="white-space: nowrap;"><Label th:utext="'Typ: '+${a.typ}"></Label></div>    
-                        </div>
-                        <div class="row fs-5">
-                            <div class="col-md text-left" style="white-space: nowrap;"><Label th:utext="'Ubezpieczenie: '+(${a.dataUbezpieczenia} ?: 'BRAK')"></Label></div>    
-                            <div class="col-md text-left" style="white-space: nowrap;"><Label th:utext="'Przegląd: '+(${a.dataPrzeglad} ?: 'BRAK')"></Label></div>    
-                            <div class="col-md text-left" style="white-space: nowrap;"><Label th:utext="'Dodano: '+(${a.dataDodania} ?: 'BRAK')"></Label></div>    
+                            <div class="col-md text-left" style="white-space: nowrap;"><Label th:utext="'Kolor: '+${a.kolor}"></Label></div>    
+                            <div class="col-md text-left" style="white-space: nowrap;"><Label th:utext="'Numer rejestracyjny: '+${a.nrRej}"></Label></div>    
                         </div>
                     </div>
+                    <a th:href="'/user/rezerwuj/'+*{a.id}" class="btn btn-primary rounded-0 rounded-bottom">Rezerwuje</a>
                 </div>
             </table>
         </div>
     </div>
    </div>
-    
   </body>
 </html>
 
 <style>
 body{
-    min-height: 100vh;
     background-color: #303030;
     }
 caption{
@@ -120,3 +119,16 @@ caption{
 :visited { color: white; }
 </style>
   
+ <!-- toast start -->
+ <div aria-live="polite" aria-atomic="true" class="d-flex justify-content-center align-items-center w-100 my-2 fixed-top">
+  <div class="toast" role="alert" data-animation="true" data-autohide="false" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+      <strong class="me-auto">Nowe powiadomienie</strong>
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body">
+      Pomyśnie dokonano rezerwacji!
+    </div>
+  </div>
+</div>
+<!-- toast end -->

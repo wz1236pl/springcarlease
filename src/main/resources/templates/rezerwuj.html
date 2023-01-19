@@ -22,10 +22,10 @@
             <a class="nav-link" href="/"><i class="bi bi-house-door-fill"></i> Strona główna </a>
           </li>
           <li class="nav-item active mx-2">
-            <a class="nav-link" href="/register"><i class="bi bi-person-fill-add"></i> Zarejestruj </a>
+            <a class="nav-link" href="/user/mojeRezerwacje"><i class="bi bi-person-fill-add"></i> Moje rezerwacje</a>
           </li>
           <li class="nav-item active mx-2">
-            <a class="nav-link" href="/login"><i class="bi bi-box-arrow-in-right"></i> Zaloguj </a>
+            <a class="nav-link" href="/logout"><i class="bi bi-box-arrow-in-right"></i> Wyloguj </a>
           </li>
         </ul>
       </div>
@@ -37,34 +37,25 @@
               <div class="col-12 col-md-9 col-lg-7 col-xl-6">
                 <div class="card" style="border-radius: 15px;">
                   <div class="card-body p-5">
-                    <h2 class="text-uppercase text-center mb-5">Zarejestruj się!</h2>
-                    <form th:action="@{/register}" th:object="${UserIn}" method="post">
+                    <h2 class="text-uppercase text-center mb-5">Wynajmij</h2>
+                    <form th:action="@{/user/rezerwuj}" th:object="${rezerwacjaIn}" method="post">
                       <div class="form-outline mb-4">
-                        <input th:field="*{email}" type="text" id="form3Example1cg" class="form-control form-control-lg" required/>
-                        <label class="form-label" for="form3Example1cg">Email</label>
+                        <input th:field="*{dataStart}" type="date" class="form-control form-control-lg" required readonly hidden/>
+                        <input th:placeholder="*{dataStart}" type="text" class="form-control form-control-lg" required readonly />
+                        <label class="form-label text-dark" >Data rozpoczęcia wynajmu </label>
                       </div>
                       <div class="form-outline mb-4">
-                        <input th:field="*{password}" type="password" id="form3Example2cg" class="form-control form-control-lg" required/>
-                        <label class="form-label" for="form3Example2cg">Hasło</label>
+                        <input th:field="*{samochod}" type="text" class="form-control form-control-lg" required readonly hidden/>
+                        <input th:placeholder="*{samochod.marka}+' '+*{samochod.model}+' '+*{samochod.cena}+'zł/24h'" type="text" class="form-control form-control-lg" required readonly />
+                        <label class="form-label text-dark" >Samochód </label>
                       </div>
                       <div class="form-outline mb-4">
-                        <input th:field="*{imie}" type="text" id="form3Example3cg" class="form-control form-control-lg" required/>
-                        <label class="form-label" for="form3Example3cg">Imie</label>
-                      </div>
-                      <div class="form-outline mb-4">
-                        <input th:field="*{nazwisko}" type="text" id="form3Example4cg" class="form-control form-control-lg" required/>
-                        <label class="form-label" for="form3Example4cg">Nazwisko</label>
-                      </div>
-                      <div class="form-outline mb-4">
-                        <input th:field="*{telefon}" type="text" id="form3Example5cg" class="form-control form-control-lg" required/>
-                        <label class="form-label" for="form3Example5cg">Telefon</label>
-                      </div>
-                      <div class="d-flex justify-content-center my-2">
-                          <label th:if="${errorUser}" class="text-danger fw-bold h5">Ten email już jest w bazie!</label>
-                          <label th:if="${errorOther}" class="text-danger fw-bold h5">Wystąpił błąd podczas dodawania!</label>
+                        <input th:field="*{uzytkownik}" type="text"  required readonly hidden/>
+                        <input th:placeholder="*{uzytkownik.imie}+' '+*{uzytkownik.nazwisko}" type="text" class="form-control form-control-lg" required readonly />
+                        <label class="form-label text-dark" >Dane wynajmującego </label>
                       </div>
                       <div class="d-flex justify-content-center">
-                        <input type="submit" value="Zarejestruj" class="btn btn-success btn-block btn-lg text-light">
+                        <input type="submit" value="Potwierdzam" class="btn btn-success btn-block btn-lg text-light">
                       </div>
                     </form>
                   </div>
@@ -81,7 +72,6 @@
 
 <style>
 body{
-    min-height: 100vh;
     background-color: #303030;
     }
 caption{

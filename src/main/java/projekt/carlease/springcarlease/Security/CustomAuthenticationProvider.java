@@ -31,7 +31,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider{
         final String email = authentication.getName();                                                  // z form logowania pobiera login
         final String password = authentication.getCredentials().toString();                             // z form logowania pobiera hasło
         
-        Uzytkownik user = uzytRepo.findByEmail(email);                                                        // szuka użytkownika z podanym w logowaniu emailem
+        Uzytkownik user = uzytRepo.findByEmail(email);                                                  // szuka użytkownika z podanym w logowaniu emailem
         if(user == null){throw new UsernameNotFoundException("User not found");}                   // jeśli nie ma takiego w bazie wywala wyjątek
         if(passwordEncoder.matches(password, user.getPassword())){                                      // jak jest to sprawdza czy hasła się zgadzają 
             List<GrantedAuthority> authorities = new ArrayList<>();                                     // tworzy liste typu GrantedAuthority

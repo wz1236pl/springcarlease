@@ -22,10 +22,7 @@
             <a class="nav-link" href="/"><i class="bi bi-house-door-fill"></i> Strona główna </a>
           </li>
           <li class="nav-item active mx-2">
-            <a class="nav-link" href="/register"><i class="bi bi-person-fill-add"></i> Zarejestruj </a>
-          </li>
-          <li class="nav-item active mx-2">
-            <a class="nav-link" href="/login"><i class="bi bi-box-arrow-in-right"></i> Zaloguj </a>
+            <a class="nav-link" href="/login"><i class="bi bi-box-arrow-in-right"></i> Wyloguj </a>
           </li>
         </ul>
       </div>
@@ -37,34 +34,61 @@
               <div class="col-12 col-md-9 col-lg-7 col-xl-6">
                 <div class="card" style="border-radius: 15px;">
                   <div class="card-body p-5">
-                    <h2 class="text-uppercase text-center mb-5">Zarejestruj się!</h2>
-                    <form th:action="@{/register}" th:object="${UserIn}" method="post">
+                    <h2 class="text-uppercase text-center mb-5">Dodaj nowy samochód!</h2>
+                    <form action="/admin/dodajAuto"  method="post" enctype="multipart/form-data">
                       <div class="form-outline mb-4">
-                        <input th:field="*{email}" type="text" id="form3Example1cg" class="form-control form-control-lg" required/>
-                        <label class="form-label" for="form3Example1cg">Email</label>
+                        <input name="nrRej" type="text" class="form-control form-control-lg" required/>
+                        <label class="form-label" >Numer rejestracyjny</label>
                       </div>
                       <div class="form-outline mb-4">
-                        <input th:field="*{password}" type="password" id="form3Example2cg" class="form-control form-control-lg" required/>
-                        <label class="form-label" for="form3Example2cg">Hasło</label>
+                        <input name="marka" type="text" class="form-control form-control-lg" required/>
+                        <label class="form-label" >Marka</label>
                       </div>
                       <div class="form-outline mb-4">
-                        <input th:field="*{imie}" type="text" id="form3Example3cg" class="form-control form-control-lg" required/>
-                        <label class="form-label" for="form3Example3cg">Imie</label>
+                        <input name="model" type="text" class="form-control form-control-lg" required/>
+                        <label class="form-label" >Model</label>
                       </div>
                       <div class="form-outline mb-4">
-                        <input th:field="*{nazwisko}" type="text" id="form3Example4cg" class="form-control form-control-lg" required/>
-                        <label class="form-label" for="form3Example4cg">Nazwisko</label>
+                        <select name="typ" class="form-select" aria-label="typ" required>
+                            <option value="Sedan">Sedan</option>
+                            <option value="Kombi">Kombi</option>
+                            <option value="Hatchback">Hatchback </option>
+                            <option value="SUV">SUV</option>
+                            <option value="Coupe">Coupe</option>
+                            <option value="Bus">Bus</option>
+                          </select>
+                        <label class="form-label" >Typ</label>
                       </div>
                       <div class="form-outline mb-4">
-                        <input th:field="*{telefon}" type="text" id="form3Example5cg" class="form-control form-control-lg" required/>
-                        <label class="form-label" for="form3Example5cg">Telefon</label>
+                        <input name="kolor" type="text"class="form-control form-control-lg" required/>
+                        <label class="form-label" >Kolor</label>
                       </div>
-                      <div class="d-flex justify-content-center my-2">
-                          <label th:if="${errorUser}" class="text-danger fw-bold h5">Ten email już jest w bazie!</label>
-                          <label th:if="${errorOther}" class="text-danger fw-bold h5">Wystąpił błąd podczas dodawania!</label>
+                      <div class="form-outline mb-4">
+                        <input name="rok" type="text" class="form-control form-control-lg" required/>
+                        <label class="form-label" >Rok</label>
+                      </div>
+                      <div class="form-outline mb-4">
+                        <input name="moc" type="text" class="form-control form-control-lg" required/>
+                        <label class="form-label" >Moc</label>
+                      </div>
+                      <div class="form-outline mb-4">
+                        <input name="cena" type="text" class="form-control form-control-lg" required/>
+                        <label class="form-label" >Cena za dzień</label>
+                      </div>
+                      <div class="form-outline mb-4">
+                        <select name="miasto" class="form-select" aria-label="typ" required>
+                            <option value="Rzeszów">Rzeszów</option>
+                            <option value="Krosno">Krosno</option>
+                            <option value="Kraków">Kraków</option>
+                          </select>
+                        <label class="form-label" >Miasto</label>
+                      </div>
+                      <div class="form-outline mb-4">
+                        <input type="file" accept="image/*" class="form-control" name="zdjecia" id="zdjecia" multiple>
+                        <label for="zdj" class="form-label">Dodaj zdjęcia</label>
                       </div>
                       <div class="d-flex justify-content-center">
-                        <input type="submit" value="Zarejestruj" class="btn btn-success btn-block btn-lg text-light">
+                        <input type="submit" value="Dodaj" class="btn btn-success btn-block btn-lg text-light">
                       </div>
                     </form>
                   </div>
