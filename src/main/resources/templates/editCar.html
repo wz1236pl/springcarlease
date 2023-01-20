@@ -43,58 +43,67 @@
               <div class="col-12 col-md-9 col-lg-7 col-xl-6">
                 <div class="card" style="border-radius: 15px;">
                   <div class="card-body p-5">
-                    <h2 class="text-uppercase text-center mb-5">Dodaj nowy samochód!</h2>
-                    <form action="/admin/dodajAuto"  method="post" enctype="multipart/form-data">
+                    <h2 class="text-uppercase text-center mb-5">Edytuj samochód</h2>
+                    <h4 th:if="${success}" class="text-uppercase text-center mb-5 text-success">Pomyślnie edytowano!</h4>
+                    <h4 th:if="${error}" class="text-uppercase text-center mb-5 text-danger">Cos poszło nie tak!</h4>
+                    <form th:action="@{/admin/edytujAuto}" th:object="${carIn}" method="post">
                       <div class="form-outline mb-4">
-                        <input name="nrRej" type="text" class="form-control form-control-lg" required/>
+                        <input th:field="*{id}" type="text" class="form-control form-control-lg" required readonly/>
+                        <label class="form-label" >Id</label>
+                      </div>
+                      <div class="form-outline mb-4">
+                        <input th:field="*{nrRej}" type="text" class="form-control form-control-lg" required/>
                         <label class="form-label" >Numer rejestracyjny</label>
                       </div>
                       <div class="form-outline mb-4">
-                        <input name="marka" type="text" class="form-control form-control-lg" required/>
+                        <input th:field="*{marka}" type="text" class="form-control form-control-lg" required/>
                         <label class="form-label" >Marka</label>
                       </div>
                       <div class="form-outline mb-4">
-                        <input name="model" type="text" class="form-control form-control-lg" required/>
+                        <input th:field="*{model}" type="text" class="form-control form-control-lg" required/>
                         <label class="form-label" >Model</label>
                       </div>
                       <div class="form-outline mb-4">
-                        <select name="typ" class="form-select" aria-label="typ" required>
-                            <option value="Sedan">Sedan</option>
-                            <option value="Kombi">Kombi</option>
-                            <option value="Hatchback">Hatchback </option>
-                            <option value="SUV">SUV</option>
-                            <option value="Coupe">Coupe</option>
-                            <option value="Bus">Bus</option>
+                        <select th:field="*{typ}" class="form-select" aria-label="typ" required>
+                            <option th:value="Sedan">Sedan</option>
+                            <option th:value="Kombi">Kombi</option>
+                            <option th:value="Hatchback">Hatchback </option>
+                            <option th:value="SUV">SUV</option>
+                            <option th:value="Coupe">Coupe</option>
+                            <option th:value="Bus">Bus</option>
                           </select>
                         <label class="form-label" >Typ</label>
                       </div>
                       <div class="form-outline mb-4">
-                        <input name="kolor" type="text"class="form-control form-control-lg" required/>
+                        <input th:field="*{kolor}" type="text"class="form-control form-control-lg" required/>
                         <label class="form-label" >Kolor</label>
                       </div>
                       <div class="form-outline mb-4">
-                        <input name="rok" type="text" class="form-control form-control-lg" required/>
+                        <input th:field="*{rok}" type="text" class="form-control form-control-lg" required/>
                         <label class="form-label" >Rok</label>
                       </div>
                       <div class="form-outline mb-4">
-                        <input name="moc" type="text" class="form-control form-control-lg" required/>
+                        <input th:field="*{moc}" type="text" class="form-control form-control-lg" required/>
                         <label class="form-label" >Moc</label>
                       </div>
                       <div class="form-outline mb-4">
-                        <input name="cena" type="text" class="form-control form-control-lg" required/>
+                        <input th:field="*{cena}" type="text" class="form-control form-control-lg" required/>
                         <label class="form-label" >Cena za dzień</label>
                       </div>
                       <div class="form-outline mb-4">
-                        <select name="miasto" class="form-select" aria-label="typ" required>
-                            <option value="Rzeszów">Rzeszów</option>
-                            <option value="Krosno">Krosno</option>
-                            <option value="Kraków">Kraków</option>
+                        <select th:field="*{miasto}" class="form-select" aria-label="typ" required>
+                            <option th:value="Rzeszów">Rzeszów</option>
+                            <option th:value="Krosno">Krosno</option>
+                            <option th:value="Kraków">Kraków</option>
                           </select>
                         <label class="form-label" >Miasto</label>
                       </div>
                       <div class="form-outline mb-4">
-                        <input type="file" accept="image/*" class="form-control" name="zdjecia" id="zdjecia" multiple>
-                        <label for="zdj" class="form-label">Dodaj zdjęcia</label>
+                        <select th:field="*{zarezerwowany}" class="form-select" aria-label="typ" required>
+                            <option th:value="1">Zablokowany</option>
+                            <option th:value="0">Dostępny</option>
+                          </select>
+                        <label class="form-label" >Dostępny</label>
                       </div>
                       <div class="d-flex justify-content-center">
                         <input type="submit" value="Dodaj" class="btn btn-success btn-block btn-lg text-light">

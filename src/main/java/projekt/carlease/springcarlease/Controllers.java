@@ -59,6 +59,7 @@ public class Controllers  {                                 //tu będziesz miał
     public String adminHomePage(Model model){
         model.addAttribute("listaWypoAkt", wypRepo.findAllByDataKoniecIsNull());
         model.addAttribute("listaWypoHis", wypRepo.findAllByDataKoniecIsNotNull());
+        model.addAttribute("autaIn",samRepo.findAll());
         return "adminHomePage";
     }
 
@@ -139,6 +140,39 @@ public class Controllers  {                                 //tu będziesz miał
         return "addNewCar";
     }
 
+    @GetMapping(value = "/admin/wyswietlAuta")
+    public String zobaczCar(Model model){
+        model.addAttribute("autaIn", samRepo.findAll());
+        return "wyswietlAuta";
+    }
+
+    @GetMapping(value = "/admin/historiaAuto/{id}")
+    public String carHistory(Model model, @PathVariable("id") Long id){
+        model.addAttribute("listaWypoHis", wypRepo.findAllBySamochodIdIs(id));
+        return "carHistory";
+    }
+
+    @GetMapping(value = "/admin/edytujAuto/{id}")
+    public String editCar(Model model, @PathVariable("id") Long id){
+        model.addAttribute("carIn", samRepo.findByIdIs(id));
+        return "editCar";
+    }
+
+    @PostMapping(value = "/admin/edytujAuto")
+    public String editCar(Model model, Samochod car){
+        try{
+            samRepo.save(car);
+            model.addAttribute("carIn", car);
+            model.addAttribute("success", true);
+            return "editCar";
+        }catch(Exception e){
+            e.printStackTrace();
+            model.addAttribute("carIn", car);
+            model.addAttribute("error", true);
+            return "editCar";
+        }
+    }
+
     @GetMapping(value = "/user/rezerwuj/{id}")
     public String rezerwuj(Model model, Authentication auth, @PathVariable("id") Long id){
         Samochod car = samRepo.findByIdIs(id);
@@ -187,6 +221,7 @@ public class Controllers  {                                 //tu będziesz miał
         model.addAttribute("UserIn", uzytRepo.findByEmail(auth.getName()));
         return "edytujUser";
     }
+
     @PostMapping(value="/user/edytujDane")
     public String edytujDane(Model model, Authentication auth, Uzytkownik edytowany){
         try {
@@ -203,7 +238,6 @@ public class Controllers  {                                 //tu będziesz miał
         } catch (Exception e) {
             return "redirect:/user/edytujDane?error";
         }
-        
     }
 
 }
