@@ -72,13 +72,13 @@ public class Wypozyczenie {
 
     public double getDni(){
         double dni = (System.currentTimeMillis()-dataStart.getTime())/86400000;
-        if(dni<1){dni=1;}
+        dni=dni+1.0;
         return dni;
     }
 
     public double getDniWszystkie(){
         double dni = (dataKoniec.getTime()-dataStart.getTime())/86400000;
-        if(dni<1){dni=1;}
+        dni=dni+1.0;
         return dni;
     }
 

@@ -71,7 +71,7 @@
                                   <td th:text="${a.moc}"></td>
                                   <td th:text="${a.cena}"></td>
                                   <td th:text="${a.miasto}"></td>
-                                  <td th:text="(${zarezerwowany} == 0)? 'Dostępny' : 'Niedostępny' "></td>
+                                  <td th:text="((${a.zarezerwowany} == 0) ? 'Dostępny' : 'Niedostępny' )"></td>
                                   <td><a th:href="'/admin/edytujAuto/'+*{a.id}"><button class="btn btn-primary">Edytuj</button></a></td>
                                   <td><a th:href="'/admin/historiaAuto/'+*{a.id}"><button class="btn btn-primary">Historia</button></a></td>
                                 </tr>

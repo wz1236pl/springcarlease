@@ -186,7 +186,7 @@ public class Controllers  {                                 //tu będziesz miał
     public String rezerwuj(Model model,Wypozyczenie wypo){
         wypRepo.save(wypo);
         Samochod car = wypo.getSamochod();
-        car.setZarezerwowany(1);
+        car.setZarezerwowany(0);
         samRepo.save(car);
         model.addAttribute("autaOut", samRepo.findAllByZarezerwowanyIs(0));
         model.addAttribute("success", true);
